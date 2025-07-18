@@ -1,0 +1,19 @@
+.clock {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-bottom: .5%;
+    padding: 5px;
+    /* background-color: #ededed; */
+    color: #000;
+    opacity: 150%;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.clock p {
+    text-align: right;
+    padding: 0;
+    margin: 0;
+}
