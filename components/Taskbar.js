@@ -4,12 +4,12 @@ import './styles/Taskbar.css';
 import Image from 'next/image';
 
 export default function Taskbar() {
-    const [clicked, setClicked] = useState(false);
+    const [clicked, setClicked] = useState(null);
     const [iconHeight, iconWidth] = [50, 50];
     const icons = ['terminal.png', 'folder.png', 'chrome.png', 'www.png', 'settings.svg'];
 
-    const handleClick = () => {
-        setClicked(true);
+    const handleClick = (index) => {
+        setClicked(index);
         setTimeout(() => setClicked(false), 150);
     }
 
@@ -20,12 +20,13 @@ export default function Taskbar() {
                 icons.map((icon, index) => (
                     <Image
                         key={index} 
-                        className={`icons ${clicked ? 'clicked' : ''}`}
+                        className={`icons ${clicked === index ? 'clicked' : ''}`}
                         src={'/icons/' + icon}
                         width={iconWidth}
                         height={iconHeight}
                         alt={icon}
-                        onClick={handleClick}
+                        onClick={() => handleClick(index)}
+                        priority
                     />
                 ))
             }
