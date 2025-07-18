@@ -1,0 +1,16 @@
+/* LinuxBootLoader.css */
+.boot-screen {
+  background-color: black;
+  color: #33ff33;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+pre {
+  white-space: pre-wrap;
+}
