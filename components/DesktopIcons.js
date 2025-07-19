@@ -13,7 +13,7 @@ export default function DesktopIcons({ desktopIcons, isWhite }) {
     }
 
     return (
-        <div className='container'>
+        <div className='container1'>
             {
                 desktopIcons.map((row, rowIndex) => (
                     <div className="row" key={rowIndex}>

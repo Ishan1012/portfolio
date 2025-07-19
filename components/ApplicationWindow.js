@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function ApplicationWindow() {
+export default function ApplicationWindow({ appDetails }) {
   return (
-    <div>
+    <div className='container'>
       
     </div>
   )

@@ -68,11 +68,20 @@ export default function Home() {
     ]
 
   ];
+  const taskList = [
+    {
+      title: 'resume',
+      filename: 'resume.pdf',
+      icon: 'pdf.png',
+      
+    }
+  ];
 
   return (
     <div className='container'>
       <Background background={background[selectedBackground]} />
       <DesktopIcons desktopIcons={desktopIcons} isWhite={background[selectedBackground].isIconWhite} />
+      
       <Taskbar icons={icons} />
       <Clock isWhite={background[selectedBackground].isWhite} />
     </div>
