@@ -12,6 +12,7 @@
     /* background-color: #ededed; */
     opacity: 150%;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .clock p {
