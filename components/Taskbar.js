@@ -19,11 +19,13 @@ export default function Taskbar({ icons }) {
                 icons.map((icon, index) => (
                     <Image
                         key={index} 
+                        style={{ width: iconWidth+'px', height: iconHeight+'px' }}
                         className={`icons ${clicked === index ? 'clicked' : ''}`}
                         src={'/icons/' + icon}
                         width={iconWidth}
                         height={iconHeight}
                         alt={icon}
+                        
                         onClick={() => handleClick(index)}
                         priority
                     />

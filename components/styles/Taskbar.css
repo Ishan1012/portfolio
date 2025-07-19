@@ -5,6 +5,7 @@
     transform: translateX(-50%);
     margin-bottom: 1%;
     display: flex;
+    padding-inline: 1%;
     justify-content: center;
 }
 

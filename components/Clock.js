@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import './styles/Clock.css'
 
-export default function Clock({ isClockWhite }) {
+export default function Clock({ isWhite }) {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [isMounted, setIsMounted] = useState(false);
 
@@ -33,8 +33,8 @@ export default function Clock({ isClockWhite }) {
 
     return (
         <div className='clock'> 
-            <p style={{color: isClockWhite ? '#fff' : '#333'}} >{formatTime(currentTime)}</p>
-            <p style={{color: isClockWhite ? '#fff' : '#333'}} >{formatDate(currentTime)}</p>
+            <p style={{color: isWhite ? '#fff' : '#333'}} >{formatTime(currentTime)}</p>
+            <p style={{color: isWhite ? '#fff' : '#333'}} >{formatDate(currentTime)}</p>
         </div>
     );
 }
