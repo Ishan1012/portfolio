@@ -1,16 +1,15 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles/Taskbar.css';
 import Image from 'next/image';
 
-export default function Taskbar() {
+export default function Taskbar({ icons }) {
     const [clicked, setClicked] = useState(null);
     const [iconHeight, iconWidth] = [50, 50];
-    const icons = ['terminal.png', 'folder.png', 'chrome.png', 'www.png', 'settings.svg'];
 
     const handleClick = (index) => {
         setClicked(index);
-        setTimeout(() => setClicked(false), 150);
+        setTimeout(() => setClicked(null), 150);
     }
 
     return (
