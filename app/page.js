@@ -102,6 +102,9 @@ export default function Home() {
       }
       setActiveWindow(null);
     }
+    else if (e === 'min') {
+      setActiveWindow(null);
+    }
   }
 
   const openWindow = ([rowIndex, iconIndex]) => {
