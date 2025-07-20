@@ -3,12 +3,13 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import './styles/DesktopIcons.css';
 
-export default function DesktopIcons({ desktopIcons, isWhite }) {
+export default function DesktopIcons({ desktopIcons, isWhite, openWindow }) {
     const [clicked, setClicked] = useState([null, null]);
     const [iconHeight, iconWidth] = [50, 50];
 
     const handleClick = (rowIndex, iconIndex) => {
         setClicked([rowIndex, iconIndex]);
+        openWindow([rowIndex, iconIndex])
         setTimeout(() => setClicked([null, null]), 150);
     }
 

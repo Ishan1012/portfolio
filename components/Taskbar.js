@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import './styles/Taskbar.css';
 import Image from 'next/image';
 
-export default function Taskbar({ icons }) {
+export default function Taskbar({ icons, openTask }) {
     const [clicked, setClicked] = useState(null);
     const [iconHeight, iconWidth] = [50, 50];
 
     const handleClick = (index) => {
+        // openTask(index);
         setClicked(index);
         setTimeout(() => setClicked(null), 150);
     }
@@ -25,7 +26,6 @@ export default function Taskbar({ icons }) {
                         width={iconWidth}
                         height={iconHeight}
                         alt={icon}
-                        
                         onClick={() => handleClick(index)}
                         priority
                     />
