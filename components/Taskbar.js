@@ -8,9 +8,11 @@ export default function Taskbar({ icons, openTask }) {
     const [iconHeight, iconWidth] = [50, 50];
 
     const handleClick = (index) => {
-        // openTask(index);
         setClicked(index);
-        setTimeout(() => setClicked(null), 150);
+        setTimeout(() => {
+            setClicked(null)
+            openTask(icons[index]);
+        }, 150);
     }
 
     return (
