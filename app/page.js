@@ -13,7 +13,7 @@ const Clock = dynamic(() => import('../components/Clock'), { ssr: false });
 export default function Home() {
   const [selectedBackground, setSelectedBackground] = useState(0);
   const [activeWindow, setActiveWindow] = useState(null);
-  const [icons, setIcons] = useState(['terminal.png', 'folder.png', 'chrome.png', 'www.png', 'settings.svg']);
+  const [icons, setIcons] = useState(['terminal.png', 'folder.png', 'chrome.png', 'settings.svg']);
   const taskList = [
     {
       name: 'resume',

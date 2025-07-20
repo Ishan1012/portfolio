@@ -9,8 +9,11 @@ export default function DesktopIcons({ desktopIcons, isWhite, openWindow }) {
 
     const handleClick = (rowIndex, iconIndex) => {
         setClicked([rowIndex, iconIndex]);
-        openWindow([rowIndex, iconIndex])
-        setTimeout(() => setClicked([null, null]), 150);
+        setTimeout(() => {
+            setClicked([null, null]);
+            openWindow([rowIndex, iconIndex]);
+        }, 150);
+        
     }
 
     return (
