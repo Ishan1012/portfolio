@@ -21,6 +21,11 @@
     background-color: #fdf6ec;
 }
 
+.dark {
+    background-color: #363636;
+    border: 2px solid #fdf6ec;
+}
+
 .maximize {
     width: 100vw;
     height: 90vh;
@@ -29,7 +34,7 @@
 .window .titlebar {
     position: relative;
     top: 10px;
-    left: 0px;
+    left: 0;
     display: flex;
     border-bottom: 2px solid #333;
     gap: 8px;

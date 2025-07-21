@@ -25,8 +25,8 @@ export default function ApplicationWindow({ activeWindow, handleEvent }) {
   if (activeWindow !== null) {
     return (
       <div className='windowContainer'>
-        <div className={`window ${maximize ? 'maximize' : ''}`}>
-          <div className="titlebar">
+        <div className={`window ${maximize ? 'maximize' : ''} ${activeWindow.isDark ? 'dark' : ''}`}>
+          <div className='titlebar' style={{borderColor: activeWindow.isDark ? '#fdf6ec': '#333'}}>
             <span className='dot red' onClick={() => setClose(true)}></span>
             <span className='dot yellow' onClick={() => setMaximize(!maximize)}></span>
             <span className='dot green' onClick={() => setMinimize(true)}></span>

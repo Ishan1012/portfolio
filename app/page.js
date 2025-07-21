@@ -8,6 +8,9 @@ import DesktopIcons from '@/components/DesktopIcons';
 import ApplicationWindow from '@/components/ApplicationWindow';
 import PdfViewer from '@/components/TaskCollection/PdfViewer';
 import BackgroundSettings from '@/components/TaskCollection/BackgroundSettings';
+import ManualFile from '@/components/TaskCollection/ManualFile';
+import FolderExplorer from '@/components/TaskCollection/FolderExplorer';
+import Terminal from '@/components/TaskCollection/Terminal';
 
 const Clock = dynamic(() => import('../components/Clock'), { ssr: false });
 
@@ -58,8 +61,8 @@ export default function Home() {
     ],
     [
       {
-        name: 'demo',
-        icon: 'chrome.png',
+        name: 'manual',
+        icon: 'txt.png',
       },
       {
         name: 'settings',
@@ -78,12 +81,49 @@ export default function Home() {
       filename: 'resume.pdf',
       icon: 'pdf.png',
       content: <PdfViewer filename={'resume.pdf'} />,
+      isDark: false,
     },
     {
       name: 'settings',
       filename: 'settings',
       icon: 'settings.svg',
       content: <BackgroundSettings background={background} setSelectedBackground={setSelectedBackground} />,
+      isDark: false,
+    },
+    {
+      name: 'images',
+      filename: 'images',
+      icon: 'folder.pdf',
+      content: <FolderExplorer />,
+      isDark: false,
+    },
+    {
+      name: 'projects',
+      filename: 'projects',
+      icon: 'folder.pdf',
+      content: <FolderExplorer />,
+      isDark: false,
+    },
+    {
+      name: 'manual',
+      filename: 'manual.txt',
+      icon: 'txt.png',
+      content: <ManualFile />,
+      isDark: false,
+    },
+    {
+      name: 'terminal',
+      filename: 'terminal.cmd',
+      icon: 'terminal.png',
+      content: <Terminal />,
+      isDark: true,
+    },
+    {
+      name: 'contact',
+      filename: 'contact.docs',
+      icon: 'word.png',
+      content: <ManualFile />,
+      isDark: false,
     },
   ];
 
