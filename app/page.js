@@ -11,6 +11,7 @@ import BackgroundSettings from '@/components/TaskCollection/BackgroundSettings';
 import ManualFile from '@/components/TaskCollection/ManualFile';
 import FolderExplorer from '@/components/TaskCollection/FolderExplorer';
 import Terminal from '@/components/TaskCollection/Terminal';
+import DemoProjects from '@/components/TaskCollection/DemoProjects';
 
 const Clock = dynamic(() => import('../components/Clock'), { ssr: false });
 
@@ -93,14 +94,14 @@ export default function Home() {
     {
       name: 'images',
       filename: 'images',
-      icon: 'folder.pdf',
+      icon: 'folder.png',
       content: <FolderExplorer />,
       isDark: false,
     },
     {
       name: 'projects',
       filename: 'projects',
-      icon: 'folder.pdf',
+      icon: 'folder.png',
       content: <FolderExplorer />,
       isDark: false,
     },
@@ -123,6 +124,13 @@ export default function Home() {
       filename: 'contact.docs',
       icon: 'word.png',
       content: <ManualFile />,
+      isDark: false,
+    },
+    {
+      name: 'demo',
+      filename: 'demo.html',
+      icon: 'chrome.png',
+      content: <DemoProjects />,
       isDark: false,
     },
   ];
@@ -158,7 +166,8 @@ export default function Home() {
   };
 
   const openTask = (taskIcon) => {
-    const active = taskList.find((task) => task.icon === taskIcon) || null;
+    console.log(taskList.find((task) => task.icon === taskIcon));
+    const active = taskList.find((task) => task.icon === taskIcon)|| null;
     setActiveWindow(active);
   }
 
