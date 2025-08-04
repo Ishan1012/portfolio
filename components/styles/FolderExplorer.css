@@ -1,37 +1,49 @@
-.settingsContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-family: monospace;
-    /* background-color: red; */
+.folderContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: monospace;
 }
 
-.settingsContainer .title {
-    font-weight: 600;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 20px;
+.folderContainer .title {
+  font-weight: 600;
+  font-size: 1.25rem; /* text-xl */
+  text-align: center;
+  margin-bottom: 1.25rem; /* mb-5 */
 }
 
-.imageContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 columns */
-    row-gap: 8%;
-    width: 100%;
-    margin-left: 8vw;
-    justify-content: center;
+.folderContainer .imageContainer {
+  display: grid;
+  width: 100%;
+  padding-left: .2rem;   /* px-4 */
+  padding-right: 1rem;
+  justify-items: center;
+  row-gap: 1rem;     
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.image {
-    border: 2px solid #333;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform .1s ease-in-out;
+@media (min-width: 640px) {
+  .folderContainer .imageContainer {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-left: .2rem;
+    padding-right: 2rem;
+  }
 }
 
-.clicked {
-    transform: scale(0.80);
+@media (min-width: 768px) {
+  .folderContainer .imageContainer {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 2rem;     
+  }
+}
+
+.folderContainer .image {
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+.folderContainer .clicked {
+  transform: scale(0.9); /* Tailwind’s scale-90 */
 }
