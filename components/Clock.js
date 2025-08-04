@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react'
 import './styles/Clock.css'
+import Battery from './Battery';
 
 export default function Clock({ isWhite }) {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -32,9 +33,14 @@ export default function Clock({ isWhite }) {
 
 
     return (
-        <div className='clock'> 
-            <p style={{color: isWhite ? '#fff' : '#333'}} >{formatTime(currentTime)}</p>
-            <p style={{color: isWhite ? '#fff' : '#333'}} >{formatDate(currentTime)}</p>
+        <div className='clock-container'>
+            <div className="battery">
+                <Battery color={isWhite ? '#fff' : '#333'} />
+            </div>
+            <div className='clock'> 
+                <p style={{color: isWhite ? '#fff' : '#333'}} >{formatTime(currentTime)}</p>
+                <p style={{color: isWhite ? '#fff' : '#333'}} >{formatDate(currentTime)}</p>
+            </div>
         </div>
     );
 }

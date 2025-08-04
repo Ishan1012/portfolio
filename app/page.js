@@ -1,183 +1,78 @@
 'use client';
-import Background from '@/components/Background'
-import Taskbar from '@/components/Taskbar'
-import React, { useState, useEffect } from 'react'
-
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+
+import Background from '@/components/Background';
+import Taskbar from '@/components/Taskbar';
 import DesktopIcons from '@/components/DesktopIcons';
 import ApplicationWindow from '@/components/ApplicationWindow';
-import PdfViewer from '@/components/TaskCollection/PdfViewer';
-import BackgroundSettings from '@/components/TaskCollection/BackgroundSettings';
-import ManualFile from '@/components/TaskCollection/ManualFile';
-import FolderExplorer from '@/components/TaskCollection/FolderExplorer';
-import Terminal from '@/components/TaskCollection/Terminal';
-import DemoProjects from '@/components/TaskCollection/DemoProjects';
+import getBackgrounds from '@/services/BackgroundService';
+import generateDesktopIcons, { generateDesktopTaskList } from '@/services/DesktopIconService';
+import generateInitialIcons from '@/services/TaskBarService';
+import generateTaskList from '@/services/TaskListService';
 
 const Clock = dynamic(() => import('../components/Clock'), { ssr: false });
 
 export default function Home() {
   const [selectedBackground, setSelectedBackground] = useState(0);
   const [activeWindow, setActiveWindow] = useState(null);
-  const [icons, setIcons] = useState(['terminal.png', 'folder.png', 'chrome.png', 'settings.svg']);
-  const background = [
-    {
-      image: "background1.jpg",
-      isWhite: false,
-      isIconWhite: false,
-    },
-    {
-      image: "background2.jpg",
-      isWhite: true,
-      isIconWhite: false,
-    },
-    {
-      image: "background3.jpg",
-      isWhite: true,
-      isIconWhite: false,
-    },
-    {
-      image: "background4.jpg",
-      isWhite: true,
-      isIconWhite: false,
-    },
-  ];
-  const desktopIcons = [
-    [
-      {
-        name: 'resume',
-        icon: 'pdf.png',
-      },
-      {
-        name: 'projects',
-        icon: 'folder.png',
-      },
-      {
-        name: 'terminal',
-        icon: 'terminal.png',
-      },
-      {
-        name: 'contact',
-        icon: 'word.png',
-      },
-    ],
-    [
-      {
-        name: 'manual',
-        icon: 'txt.png',
-      },
-      {
-        name: 'settings',
-        icon: 'settings.svg',
-      },
-      {
-        name: 'images',
-        icon: 'folder.png',
-      },
-    ]
-
-  ];
-  const taskList = [
-    {
-      name: 'resume',
-      filename: 'resume.pdf',
-      icon: 'pdf.png',
-      content: <PdfViewer filename={'resume.pdf'} />,
-      isDark: false,
-    },
-    {
-      name: 'settings',
-      filename: 'settings',
-      icon: 'settings.svg',
-      content: <BackgroundSettings background={background} setSelectedBackground={setSelectedBackground} />,
-      isDark: false,
-    },
-    {
-      name: 'images',
-      filename: 'images',
-      icon: 'folder.png',
-      content: <FolderExplorer />,
-      isDark: false,
-    },
-    {
-      name: 'projects',
-      filename: 'projects',
-      icon: 'folder.png',
-      content: <FolderExplorer />,
-      isDark: false,
-    },
-    {
-      name: 'manual',
-      filename: 'manual.txt',
-      icon: 'txt.png',
-      content: <ManualFile />,
-      isDark: false,
-    },
-    {
-      name: 'terminal',
-      filename: 'terminal.cmd',
-      icon: 'terminal.png',
-      content: <Terminal />,
-      isDark: true,
-    },
-    {
-      name: 'contact',
-      filename: 'contact.docs',
-      icon: 'word.png',
-      content: <ManualFile />,
-      isDark: false,
-    },
-    {
-      name: 'demo',
-      filename: 'demo.html',
-      icon: 'chrome.png',
-      content: <DemoProjects />,
-      isDark: false,
-    },
-  ];
+  const backgrounds = getBackgrounds();
+  const [requirementsForm, setRequirementsForm] = useState([
+    backgrounds,
+    setSelectedBackground
+  ]);
+  const [taskList, setTaskList] = useState(generateTaskList(requirementsForm));
+  const [desktopTaskList, setDesktopTaskList] = useState(generateDesktopTaskList(taskList));
+  const [taskBarIcons, setTaskBarIcons] = useState(generateInitialIcons(taskList));
+  const [desktopIcons, setDesktopIcons] = useState(generateDesktopIcons(desktopTaskList));
 
   const addTask = (icon) => {
-    setIcons((prevItems) => [...prevItems, icon]);
+    setTaskBarIcons((prev) => [...prev, icon]);
   };
 
   const removeTask = (icon) => {
-    setIcons((prevItems) => prevItems.filter(item => item !== icon));
+    setTaskBarIcons((prev) => prev.filter((item) => item !== icon));
   };
 
   const handleEvent = (e, icon) => {
     if (e === 'close') {
-      if (icon !== 'terminal.png' && icon !== 'folder.png' && icon !== 'chrome.png' && icon !== 'settings.svg') {
+      if (!['terminal.png', 'folder.png', 'chrome.png', 'settings.svg'].includes(icon)) {
         removeTask(icon);
       }
       setActiveWindow(null);
-    }
-    else if (e === 'min') {
+    } else if (e === 'min') {
       setActiveWindow(null);
     }
-  }
+  };
 
   const openWindow = ([rowIndex, iconIndex]) => {
-    const active = taskList.find((task) => task.name === desktopIcons?.[rowIndex]?.[iconIndex]?.name) || null;
+    const desktopItem = desktopIcons?.[rowIndex]?.[iconIndex];
+    const active = taskList.find((task) => task.name === desktopItem?.name) || null;
     setActiveWindow(active);
-    if (active) {
-      if (desktopIcons[rowIndex][iconIndex].icon !== 'terminal.png' && desktopIcons[rowIndex][iconIndex].icon !== 'folder.png' && desktopIcons[rowIndex][iconIndex].icon !== 'chrome.png' && desktopIcons[rowIndex][iconIndex].icon !== 'settings.svg') {
-        addTask(desktopIcons[rowIndex][iconIndex].icon);
-      }
+
+    if (active && !['terminal.png', 'folder.png', 'chrome.png', 'settings.svg'].includes(desktopItem.icon)) {
+      addTask(desktopItem.icon);
     }
   };
 
   const openTask = (taskIcon) => {
-    console.log(taskList.find((task) => task.icon === taskIcon));
-    const active = taskList.find((task) => task.icon === taskIcon)|| null;
+    const active = taskList.find((task) => task.icon === taskIcon) || null;
     setActiveWindow(active);
-  }
+  };
+
+  const currentBg = backgrounds[selectedBackground];
 
   return (
-    <div className='main-container'>
-      <Background background={background[selectedBackground]} />
-      <DesktopIcons desktopIcons={desktopIcons} isWhite={background[selectedBackground].isIconWhite} openWindow={openWindow} />
+    <div className="main-container">
+      <Background background={currentBg} />
+      <DesktopIcons
+        desktopIcons={desktopIcons}
+        isWhite={currentBg.isIconWhite}
+        openWindow={openWindow}
+      />
       <ApplicationWindow activeWindow={activeWindow} handleEvent={handleEvent} />
-      <Taskbar icons={icons} openTask={openTask} />
-      <Clock isWhite={background[selectedBackground].isWhite} />
+      <Taskbar icons={taskBarIcons} openTask={openTask} />
+      <Clock isWhite={currentBg.isWhite} />
     </div>
-  )
+  );
 }

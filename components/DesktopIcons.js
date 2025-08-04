@@ -13,7 +13,6 @@ export default function DesktopIcons({ desktopIcons, isWhite, openWindow }) {
             setClicked([null, null]);
             openWindow([rowIndex, iconIndex]);
         }, 150);
-        
     }
 
     return (

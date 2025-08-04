@@ -1,22 +1,33 @@
+.clock-container {
+  position: fixed;       /* Ensures it's fixed to the viewport */
+  bottom: 0;
+  right: 0;
+  display: flex;         /* Align internal items side-by-side */
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;              /* Space between clock and battery */
+  padding: 4px 12px;     /* Optional padding for spacing */
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
 .clock {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-right: 10px;
-    margin-bottom: .5%;
-    padding: 5px;
-    font-family: monospace;
-    font-size: 1rem;
-    text-align: center;
-    /* background-color: #ededed; */
-    opacity: 150%;
-    border-radius: 10px;
-    cursor: pointer;
-    user-select: none;
+  margin: 0;
+  padding: 5px 10px;
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: right;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  color: white;         /* Customize based on background */
 }
 
 .clock p {
-    text-align: right;
-    padding: 0;
-    margin: 0;
+  margin: 0;
+  padding: 0;
 }
